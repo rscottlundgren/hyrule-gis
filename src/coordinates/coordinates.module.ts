@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { CoordinatesController } from './coordinates.controller';
 
-@Module({})
+@Module({
+  controllers: [CoordinatesController]
+})
 export class CoordinatesModule {}
