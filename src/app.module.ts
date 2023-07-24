@@ -5,13 +5,14 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { CoordinatesModule } from './coordinates/coordinates.module';
 import { MaterialsModule } from './materials/materials.module';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [],
+      entities: [User],
       synchronize: true,
     }),
     UsersModule,
