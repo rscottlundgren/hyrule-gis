@@ -19,4 +19,7 @@ export class Coordinate {
 
   @Column()
   landmark_id: number;
+
+  @Column()
+  landmark_count: number;
 }
