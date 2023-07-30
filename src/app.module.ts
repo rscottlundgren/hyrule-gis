@@ -8,6 +8,7 @@ import { MaterialsModule } from './materials/materials.module';
 import { Coordinate } from './coordinates/entities/coordinate.entity';
 import { Material } from './materials/entities/material.entity';
 import { User } from './users/entities/user.entity';
+import { CommonLocationsModule } from './common-locations/common-locations.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { User } from './users/entities/user.entity';
     UsersModule,
     CoordinatesModule,
     MaterialsModule,
+    CommonLocationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
