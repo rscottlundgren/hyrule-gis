@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateCommonLocationDto } from './dtos/create-common-location.dto';
 import { CommonLocationsService } from './common-locations.service';
 
@@ -11,5 +11,15 @@ export class CommonLocationsController {
   @Post()
   createCommonLocation(@Body() body: CreateCommonLocationDto) {
     this.commonLocationsService.create(body.name);
+  }
+
+  @Get()
+  findAllCommonLocations() {
+    return this.commonLocationsService.find();
+  }
+
+  @Get('/:id')
+  findCommonLocation(@Param('id') id: string) {
+    return this.commonLocationsService.findOne(parseInt(id));
   }
 }
