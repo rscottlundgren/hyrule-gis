@@ -15,4 +15,16 @@ export class CommonLocationsService {
 
     return this.repo.save(commonLocation);
   }
+
+  find() {
+    return this.repo.find({
+      select: {
+        name: true,
+      },
+    });
+  }
+
+  findOne(id: number) {
+    return this.repo.findOneBy({ id });
+  }
 }
