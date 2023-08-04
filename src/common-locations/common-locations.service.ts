@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CommonLocation } from './entities/common-location.entity';
@@ -26,5 +26,17 @@ export class CommonLocationsService {
 
   findOne(id: number) {
     return this.repo.findOneBy({ id });
+  }
+
+  async update(id: number, attrs: Partial<CommonLocation>) {
+    const commonLocation = await this.findOne(id);
+
+    if (!commonLocation) {
+      throw new NotFoundException();
+    }
+
+    Object.assign(commonLocation, attrs);
+
+    return this.repo.save(commonLocation);
   }
 }
