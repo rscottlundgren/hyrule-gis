@@ -34,14 +34,14 @@ export class CommonLocationsController {
 
   @Patch('/:id')
   updateCommonLocation(
-    @Param() id: string,
+    @Param('id') id: string,
     @Body() body: UpdateCommonLocationDto,
   ) {
     return this.commonLocationsService.update(parseInt(id), body);
   }
 
   @Delete('/:id')
-  removeCommonLocation(@Param() id: string) {
+  removeCommonLocation(@Param('id') id: string) {
     return this.commonLocationsService.remove(parseInt(id));
   }
 }
