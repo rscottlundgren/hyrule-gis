@@ -7,7 +7,4 @@ export class CommonLocation {
 
   @Column()
   name: string;
-
-  @Column()
-  materials: number[];
 }
