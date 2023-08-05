@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CommonLocationsService } from './common-locations.service';
 import { CreateCommonLocationDto } from './dtos/create-common-location.dto';
 import { UpdateCommonLocationDto } from './dtos/update-common-location.dto';
@@ -30,5 +38,10 @@ export class CommonLocationsController {
     @Body() body: UpdateCommonLocationDto,
   ) {
     return this.commonLocationsService.update(parseInt(id), body);
+  }
+
+  @Delete('/:id')
+  removeCommonLocation(@Param() id: string) {
+    return this.commonLocationsService.remove(parseInt(id));
   }
 }
