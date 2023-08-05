@@ -40,7 +40,7 @@ export class CommonLocationsService {
     return this.repo.save(commonLocation);
   }
 
-  async delete(id: number) {
+  async remove(id: number) {
     const commonLocation = await this.findOne(id);
 
     if (!commonLocation) {
