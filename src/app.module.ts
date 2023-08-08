@@ -7,12 +7,14 @@ import { AppService } from './app.service';
 import { CommonLocationsModule } from './common-locations/common-locations.module';
 import { CoordinatesModule } from './coordinates/coordinates.module';
 import { MaterialsModule } from './materials/materials.module';
+import { UniqueCookingEffectsModule } from './unique-cooking-effects/unique-cooking-effects.module';
 import { UsersModule } from './users/users.module';
 
 // Entities
 import { CommonLocation } from './common-locations/entities/common-location.entity';
 import { Coordinate } from './coordinates/entities/coordinate.entity';
 import { Material } from './materials/entities/material.entity';
+import { UniqueCookingEffect } from './unique-cooking-effects/entities/unique-cooking-effect.entity';
 import { User } from './users/entities/user.entity';
 
 @Module({
@@ -20,13 +22,20 @@ import { User } from './users/entities/user.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [CommonLocation, Coordinate, Material, User],
+      entities: [
+        CommonLocation,
+        Coordinate,
+        Material,
+        UniqueCookingEffect,
+        User,
+      ],
       synchronize: true,
     }),
     UsersModule,
     CoordinatesModule,
     MaterialsModule,
     CommonLocationsModule,
+    UniqueCookingEffectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
