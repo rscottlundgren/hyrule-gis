@@ -14,6 +14,7 @@ import { UsersModule } from './users/users.module';
 import { CommonLocation } from './common-locations/entities/common-location.entity';
 import { Coordinate } from './coordinates/entities/coordinate.entity';
 import { Material } from './materials/entities/material.entity';
+import { UniqueCookingEffect } from './unique-cooking-effects/entities/unique-cooking-effect.entity';
 import { User } from './users/entities/user.entity';
 
 @Module({
@@ -21,7 +22,13 @@ import { User } from './users/entities/user.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'db.sqlite',
-      entities: [CommonLocation, Coordinate, Material, User],
+      entities: [
+        CommonLocation,
+        Coordinate,
+        Material,
+        UniqueCookingEffect,
+        User,
+      ],
       synchronize: true,
     }),
     UsersModule,
