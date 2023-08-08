@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { CommonLocationsModule } from './common-locations/common-locations.module';
 import { CoordinatesModule } from './coordinates/coordinates.module';
 import { MaterialsModule } from './materials/materials.module';
+import { UniqueCookingEffectsModule } from './unique-cooking-effects/unique-cooking-effects.module';
 import { UsersModule } from './users/users.module';
 
 // Entities
@@ -27,6 +28,7 @@ import { User } from './users/entities/user.entity';
     CoordinatesModule,
     MaterialsModule,
     CommonLocationsModule,
+    UniqueCookingEffectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
