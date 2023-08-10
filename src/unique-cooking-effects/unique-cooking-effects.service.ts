@@ -27,4 +27,16 @@ export class UniqueCookingEffectsService {
 
     return this.repo.save(uniqueCookingEffect);
   }
+
+  find() {
+    return this.repo.find({
+      select: {
+        name: true,
+      },
+    });
+  }
+
+  findOne(id: number) {
+    return this.repo.findOneBy({ id });
+  }
 }
