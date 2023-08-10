@@ -1,5 +1,9 @@
 import { Repository } from 'typeorm';
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UniqueCookingEffect } from './entities/unique-cooking-effect.entity';
 
@@ -38,5 +42,17 @@ export class UniqueCookingEffectsService {
 
   findOne(id: number) {
     return this.repo.findOneBy({ id });
+  }
+
+  async update(id: number, attrs: Partial<UniqueCookingEffect>) {
+    const uniqueCookingEffect = await this.findOne(id);
+
+    if (!uniqueCookingEffect) {
+      throw new NotFoundException();
+    }
+
+    Object.assign(uniqueCookingEffect, attrs);
+
+    return this.repo.save(uniqueCookingEffect);
   }
 }
