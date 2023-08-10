@@ -55,4 +55,14 @@ export class UniqueCookingEffectsService {
 
     return this.repo.save(uniqueCookingEffect);
   }
+
+  async remove(id: number) {
+    const uniqueCookingEffect = await this.findOne(id);
+
+    if (!uniqueCookingEffect) {
+      throw new NotFoundException();
+    }
+
+    return this.repo.remove(uniqueCookingEffect);
+  }
 }
