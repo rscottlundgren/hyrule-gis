@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { UniqueCookingEffectsService } from './unique-cooking-effects.service';
 import { CreateUniqueCookingEffectDto } from './dtos/create-unique-cooking-effect.dto';
 import { UpdateUniqueCookingEffectDto } from './dtos/update-unique-cooking-effect.dto';
@@ -30,5 +38,10 @@ export class UniqueCookingEffectsController {
     @Body() body: UpdateUniqueCookingEffectDto,
   ) {
     return this.uniqueCookingEffectsService.update(parseInt(id), body);
+  }
+
+  @Delete('/:id')
+  removeUniqueCookingEffect(@Param('id') id: string) {
+    return this.uniqueCookingEffectsService.remove(parseInt(id));
   }
 }
