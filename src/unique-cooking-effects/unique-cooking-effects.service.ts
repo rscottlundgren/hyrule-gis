@@ -36,6 +36,7 @@ export class UniqueCookingEffectsService {
     return this.repo.find({
       select: {
         name: true,
+        description: true,
       },
     });
   }
