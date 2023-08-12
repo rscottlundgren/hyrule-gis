@@ -19,7 +19,7 @@ export class CommonLocationsController {
 
   @Post()
   createCommonLocation(@Body() body: CreateCommonLocationDto) {
-    this.commonLocationsService.create(body.name);
+    return this.commonLocationsService.create(body.name);
   }
 
   @Get()

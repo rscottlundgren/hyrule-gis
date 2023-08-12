@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CommonLocation } from './entities/common-location.entity';
@@ -10,7 +14,19 @@ export class CommonLocationsService {
     private readonly repo: Repository<CommonLocation>,
   ) {}
 
-  create(name: string) {
+  async create(name: string) {
+    const potentialDuplicateLocation = await this.repo.find({
+      where: { name },
+    });
+
+    if (potentialDuplicateLocation.length !== 0) {
+      const { id, name } = potentialDuplicateLocation[0];
+
+      throw new ConflictException(
+        `A 'common_location' record with a 'name' of ${name} already exists as id #${id}`,
+      );
+    }
+
     const commonLocation = this.repo.create({ name });
 
     return this.repo.save(commonLocation);
