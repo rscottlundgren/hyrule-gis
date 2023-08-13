@@ -14,6 +14,7 @@ export class CreateMaterialDto {
   readonly fuse_attack_power: number;
 
   @IsNumber()
+  @IsOptional()
   readonly hearts_recovered: number;
 
   @IsString()
@@ -24,5 +25,6 @@ export class CreateMaterialDto {
   readonly common_locations: string[];
 
   @IsBoolean()
+  @IsOptional()
   readonly tradeable: boolean;
 }
