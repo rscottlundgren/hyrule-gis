@@ -34,7 +34,7 @@ export class MaterialsController {
     return this.materialsService.find();
   }
 
-  @Get(':/id')
+  @Get('/:id')
   findMaterial(@Param('id') id: string) {
     return this.materialsService.findOne(parseInt(id));
   }
