@@ -1,5 +1,9 @@
 import { Repository } from 'typeorm';
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Material } from './entities/material.entity';
 
@@ -62,5 +66,17 @@ export class MaterialsService {
 
   findOne(id: number) {
     return this.repo.findOneBy({ id });
+  }
+
+  async update(id: number, attrs: Partial<Material>) {
+    const material = await this.findOne(id);
+
+    if (!material) {
+      throw new NotFoundException();
+    }
+
+    Object.assign(material, attrs);
+
+    return this.repo.save(material);
   }
 }
