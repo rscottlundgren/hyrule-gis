@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { MaterialsService } from './materials.service';
 import { CreateMaterialDto } from './dtos/create-material.dto';
 
@@ -18,5 +18,15 @@ export class MaterialsController {
       body.common_locations,
       body.tradeable,
     );
+  }
+
+  @Get()
+  findAllMaterials() {
+    return this.materialsService.find();
+  }
+
+  @Get(':/id')
+  findMaterial(@Param('id') id: string) {
+    return this.materialsService.findOne(parseInt(id));
   }
 }
