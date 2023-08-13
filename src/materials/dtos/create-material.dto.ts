@@ -1,6 +1,9 @@
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateMaterialDto {
+  @IsNumber()
+  readonly id: number;
+
   @IsString()
   readonly name: string;
 
@@ -14,6 +17,7 @@ export class CreateMaterialDto {
   readonly hearts_recovered: number;
 
   @IsString()
+  @IsOptional()
   readonly unique_cooking_effect: string;
 
   @IsString({ each: true })
