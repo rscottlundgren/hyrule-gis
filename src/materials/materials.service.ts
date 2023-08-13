@@ -10,6 +10,7 @@ export class MaterialsService {
   ) {}
 
   async create(
+    id: number,
     name: string,
     description: string,
     fuse_attack_power: number,
@@ -31,6 +32,7 @@ export class MaterialsService {
     }
 
     const material = this.repo.create({
+      id,
       name,
       description,
       fuse_attack_power,
