@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { MaterialsService } from './materials.service';
 import { CreateMaterialDto } from './dtos/create-material.dto';
 import { UpdateMaterialDto } from './dtos/update-material.dto';
@@ -34,5 +42,10 @@ export class MaterialsController {
   @Patch('/:id')
   updateMaterial(@Param('id') id: string, @Body() body: UpdateMaterialDto) {
     return this.materialsService.update(parseInt(id), body);
+  }
+
+  @Delete('/:id')
+  removeMaterial(@Param('id') id: string) {
+    return this.materialsService.remove(parseInt(id));
   }
 }
