@@ -18,10 +18,10 @@ export class Material {
   hearts_recovered: number;
 
   @Column({ nullable: true })
-  unique_cooking_effects: string;
+  unique_cooking_effect: string;
 
-  @Column()
-  common_locations: string;
+  @Column('json')
+  common_locations: string[];
 
   @Column({ nullable: true })
   tradeable: boolean;
