@@ -13,11 +13,11 @@ export class CreateMaterialDto {
   @IsNumber()
   readonly hearts_recovered: number;
 
-  @IsNumber()
-  readonly unique_cooking_effect: number;
+  @IsString()
+  readonly unique_cooking_effect: string;
 
-  @IsNumber({ allowInfinity: false, allowNaN: false }, { each: true })
-  readonly common_location: number[];
+  @IsString({ each: true })
+  readonly common_locations: string[];
 
   @IsBoolean()
   readonly tradeable: boolean;
