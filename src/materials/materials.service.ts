@@ -44,4 +44,23 @@ export class MaterialsService {
 
     return this.repo.save(material);
   }
+
+  find() {
+    return this.repo.find({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        fuse_attack_power: true,
+        hearts_recovered: true,
+        unique_cooking_effect: true,
+        common_locations: true,
+        tradeable: true,
+      },
+    });
+  }
+
+  findOne(id: number) {
+    return this.repo.findOneBy({ id });
+  }
 }
