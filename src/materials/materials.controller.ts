@@ -9,6 +9,7 @@ export class MaterialsController {
   @Post()
   createMaterial(@Body() body: CreateMaterialDto) {
     return this.materialsService.create(
+      body.id,
       body.name,
       body.description,
       body.fuse_attack_power,
