@@ -14,15 +14,15 @@ export class Material {
   @Column()
   fuse_attack_power: number;
 
-  @Column()
+  @Column({ nullable: true })
   hearts_recovered: number;
 
-  @Column()
+  @Column({ nullable: true })
   unique_cooking_effects: string;
 
   @Column()
   common_locations: string;
 
-  @Column()
+  @Column({ nullable: true })
   tradeable: boolean;
 }
