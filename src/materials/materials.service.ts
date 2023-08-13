@@ -79,4 +79,14 @@ export class MaterialsService {
 
     return this.repo.save(material);
   }
+
+  async remove(id: number) {
+    const material = await this.findOne(id);
+
+    if (!material) {
+      throw new NotFoundException();
+    }
+
+    return this.repo.remove(material);
+  }
 }
