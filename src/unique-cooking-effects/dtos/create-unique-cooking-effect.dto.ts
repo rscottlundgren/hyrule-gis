@@ -1,4 +1,5 @@
 import { IsString } from 'class-validator';
+import { Material } from '../../materials/entities/material.entity';
 
 export class CreateUniqueCookingEffectDto {
   @IsString()
@@ -6,4 +7,6 @@ export class CreateUniqueCookingEffectDto {
 
   @IsString()
   description: string;
+
+  materials: Material[];
 }
