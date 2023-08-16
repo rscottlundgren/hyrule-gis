@@ -1,4 +1,5 @@
 import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { UniqueCookingEffect } from '../../unique-cooking-effects/entities/unique-cooking-effect.entity';
 
 export class CreateMaterialDto {
   @IsNumber()
@@ -19,7 +20,7 @@ export class CreateMaterialDto {
 
   @IsString()
   @IsOptional()
-  readonly unique_cooking_effect: string;
+  readonly unique_cooking_effect: UniqueCookingEffect;
 
   @IsString({ each: true })
   readonly common_locations: string[];
