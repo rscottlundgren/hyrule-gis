@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Material } from './entities/material.entity';
+import { UniqueCookingEffect } from '../unique-cooking-effects/entities/unique-cooking-effect.entity';
 
 @Injectable()
 export class MaterialsService {
@@ -19,14 +20,16 @@ export class MaterialsService {
     description: string,
     fuse_attack_power: number,
     hearts_recovered: number,
-    unique_cooking_effect: string,
+    unique_cooking_effect: UniqueCookingEffect,
     common_locations: string[],
     tradeable: boolean,
   ) {
+    console.log('Creating Potential Duplicate...');
     const potentialDuplicateMaterial = await this.repo.find({
       where: { name },
     });
 
+    console.log('Potential Duplicate Object Created...');
     if (potentialDuplicateMaterial.length !== 0) {
       const { id, name } = potentialDuplicateMaterial[0];
 
@@ -34,6 +37,8 @@ export class MaterialsService {
         `A 'material' record with a 'name' of ${name} already exists as id #${id}`,
       );
     }
+
+    console.log('No Duplicates, Attempting To Create Record Row...');
 
     const material = this.repo.create({
       id,
@@ -46,6 +51,8 @@ export class MaterialsService {
       tradeable,
     });
 
+    console.log('Record Row Object Successfully Created...');
+
     return this.repo.save(material);
   }
 
@@ -57,7 +64,7 @@ export class MaterialsService {
         description: true,
         fuse_attack_power: true,
         hearts_recovered: true,
-        unique_cooking_effect: true,
+        unique_cooking_effect: { name: true },
         common_locations: true,
         tradeable: true,
       },
