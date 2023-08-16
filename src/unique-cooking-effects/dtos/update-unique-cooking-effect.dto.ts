@@ -1,4 +1,5 @@
 import { IsString, IsOptional } from 'class-validator';
+import { Material } from '../../materials/entities/material.entity';
 
 export class UpdateUniqueCookingEffectDto {
   @IsString()
@@ -8,4 +9,6 @@ export class UpdateUniqueCookingEffectDto {
   @IsString()
   @IsOptional()
   description: string;
+
+  materials: Material[];
 }
