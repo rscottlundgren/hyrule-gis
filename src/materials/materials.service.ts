@@ -87,6 +87,9 @@ export class MaterialsService {
         common_locations: true,
         tradeable: true,
       },
+      relations: {
+        unique_cooking_effect: true,
+      },
     });
   }
 
