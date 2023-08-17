@@ -35,8 +35,13 @@ export class UniqueCookingEffectsService {
   findAll() {
     return this.repo.find({
       select: {
+        id: true,
         name: true,
         description: true,
+        materials: { name: true },
+      },
+      relations: {
+        materials: true,
       },
     });
   }
