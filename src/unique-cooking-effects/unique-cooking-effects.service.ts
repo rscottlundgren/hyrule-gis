@@ -32,7 +32,7 @@ export class UniqueCookingEffectsService {
     return this.repo.save(uniqueCookingEffect);
   }
 
-  find() {
+  findAll() {
     return this.repo.find({
       select: {
         name: true,
@@ -41,12 +41,18 @@ export class UniqueCookingEffectsService {
     });
   }
 
-  findOne(id: number) {
+  findByName(name: string) {
+    return this.repo.find({
+      where: { name },
+    });
+  }
+
+  findById(id: number) {
     return this.repo.findOneBy({ id });
   }
 
   async update(id: number, attrs: Partial<UniqueCookingEffect>) {
-    const uniqueCookingEffect = await this.findOne(id);
+    const uniqueCookingEffect = await this.findById(id);
 
     if (!uniqueCookingEffect) {
       throw new NotFoundException();
@@ -58,7 +64,7 @@ export class UniqueCookingEffectsService {
   }
 
   async remove(id: number) {
-    const uniqueCookingEffect = await this.findOne(id);
+    const uniqueCookingEffect = await this.findById(id);
 
     if (!uniqueCookingEffect) {
       throw new NotFoundException();
