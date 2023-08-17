@@ -24,12 +24,12 @@ export class UniqueCookingEffectsController {
 
   @Get()
   findAllUniqueCookingEffects() {
-    return this.uniqueCookingEffectsService.find();
+    return this.uniqueCookingEffectsService.findAll();
   }
 
   @Get('/:id')
   findUniqueCookingEffect(@Param('id') id: string) {
-    return this.uniqueCookingEffectsService.findOne(parseInt(id));
+    return this.uniqueCookingEffectsService.findById(parseInt(id));
   }
 
   @Patch('/:id')

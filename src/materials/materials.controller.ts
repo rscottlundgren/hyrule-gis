@@ -8,7 +8,6 @@ import {
   Post,
 } from '@nestjs/common';
 import { MaterialsService } from './materials.service';
-import { CreateMaterialDto } from './dtos/create-material.dto';
 import { UpdateMaterialDto } from './dtos/update-material.dto';
 
 @Controller('materials')
@@ -16,16 +15,25 @@ export class MaterialsController {
   constructor(private readonly materialsService: MaterialsService) {}
 
   @Post()
-  createMaterial(@Body() body: CreateMaterialDto) {
+  createMaterial(
+    @Body('id') id: number,
+    @Body('name') name: string,
+    @Body('description') description: string,
+    @Body('fuse_attack_power') fuse_attack_power: number,
+    @Body('hearts_recovered') hearts_recovered: number,
+    @Body('common_locations') common_locations: string[],
+    @Body('tradeable') tradeable: boolean,
+    @Body('unique_cooking_effect') unique_cooking_effect: string,
+  ) {
     return this.materialsService.create(
-      body.id,
-      body.name,
-      body.description,
-      body.fuse_attack_power,
-      body.hearts_recovered,
-      body.unique_cooking_effect,
-      body.common_locations,
-      body.tradeable,
+      id,
+      name,
+      description,
+      fuse_attack_power,
+      hearts_recovered,
+      common_locations,
+      tradeable,
+      unique_cooking_effect,
     );
   }
 

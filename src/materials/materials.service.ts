@@ -6,11 +6,13 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Material } from './entities/material.entity';
+import { UniqueCookingEffectsService } from 'src/unique-cooking-effects/unique-cooking-effects.service';
 
 @Injectable()
 export class MaterialsService {
   constructor(
     @InjectRepository(Material) private readonly repo: Repository<Material>,
+    private readonly uceService: UniqueCookingEffectsService,
   ) {}
 
   async create(
@@ -19,32 +21,49 @@ export class MaterialsService {
     description: string,
     fuse_attack_power: number,
     hearts_recovered: number,
-    unique_cooking_effect: string,
     common_locations: string[],
     tradeable: boolean,
+    unique_cooking_effect: string,
   ) {
-    const potentialDuplicateMaterial = await this.repo.find({
+    /**
+     * 1. Check to see if we can return a value for the unique_cooking_effect
+     */
+    const potentialUniqueCookingEffect = await this.uceService.findByName(
+      unique_cooking_effect,
+    );
+
+    /**
+     * 3. Check to see if we can return a value for the material
+     */
+    const potentialMaterial = await this.repo.find({
       where: { name },
     });
 
-    if (potentialDuplicateMaterial.length !== 0) {
-      const { id, name } = potentialDuplicateMaterial[0];
+    /**
+     * 4. Validate presence of material value; throw err if present
+     */
+    if (potentialMaterial.length !== 0) {
+      const { id, name } = potentialMaterial[0];
 
       throw new ConflictException(
         `A 'material' record with a 'name' of ${name} already exists as id #${id}`,
       );
     }
 
+    /**
+     * 5. Create the material object
+     */
     const material = this.repo.create({
       id,
       name,
       description,
       fuse_attack_power,
       hearts_recovered,
-      unique_cooking_effect,
       common_locations,
       tradeable,
     });
+
+    material.unique_cooking_effect = potentialUniqueCookingEffect[0];
 
     return this.repo.save(material);
   }
@@ -57,9 +76,12 @@ export class MaterialsService {
         description: true,
         fuse_attack_power: true,
         hearts_recovered: true,
-        unique_cooking_effect: true,
+        unique_cooking_effect: { name: true },
         common_locations: true,
         tradeable: true,
+      },
+      relations: {
+        unique_cooking_effect: true,
       },
     });
   }

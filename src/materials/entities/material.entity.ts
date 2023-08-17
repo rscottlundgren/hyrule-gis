@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
+import { UniqueCookingEffect } from '../../unique-cooking-effects/entities/unique-cooking-effect.entity';
 
 @Entity()
 export class Material {
@@ -17,8 +18,12 @@ export class Material {
   @Column({ nullable: true })
   hearts_recovered: number;
 
-  @Column({ nullable: true })
-  unique_cooking_effect: string;
+  @ManyToOne(
+    () => UniqueCookingEffect,
+    (uniqueCookingEffect) => uniqueCookingEffect.materials,
+    { nullable: true },
+  )
+  unique_cooking_effect: UniqueCookingEffect;
 
   @Column('json')
   common_locations: string[];
