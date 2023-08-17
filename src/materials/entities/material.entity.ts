@@ -21,7 +21,7 @@ export class Material {
   @ManyToOne(
     () => UniqueCookingEffect,
     (uniqueCookingEffect) => uniqueCookingEffect.materials,
-    { cascade: ['insert', 'update', 'remove'], nullable: true },
+    { nullable: true },
   )
   unique_cooking_effect: UniqueCookingEffect;
 
