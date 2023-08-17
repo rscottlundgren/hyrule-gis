@@ -8,5 +8,6 @@ import { UniqueCookingEffectsService } from './unique-cooking-effects.service';
   imports: [TypeOrmModule.forFeature([UniqueCookingEffect])],
   controllers: [UniqueCookingEffectsController],
   providers: [UniqueCookingEffectsService],
+  exports: [UniqueCookingEffectsService],
 })
 export class UniqueCookingEffectsModule {}
