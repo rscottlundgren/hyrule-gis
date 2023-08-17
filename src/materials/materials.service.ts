@@ -33,13 +33,6 @@ export class MaterialsService {
     );
 
     /**
-     * 2. Validate presence of unique_cooking_effect value; throw err if absent
-     */
-    if (potentialUniqueCookingEffect.length === 0) {
-      throw new ConflictException("No such 'unique_cooking_effect' exists");
-    }
-
-    /**
      * 3. Check to see if we can return a value for the material
      */
     const potentialMaterial = await this.repo.find({
@@ -70,7 +63,7 @@ export class MaterialsService {
       tradeable,
     });
 
-    Object.assign(material, potentialUniqueCookingEffect);
+    material.unique_cooking_effect = potentialUniqueCookingEffect[0];
 
     return this.repo.save(material);
   }
