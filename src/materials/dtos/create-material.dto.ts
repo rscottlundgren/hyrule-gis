@@ -17,6 +17,10 @@ export class CreateMaterialDto {
   @IsOptional()
   readonly hearts_recovered: number;
 
+  @IsString()
+  @IsOptional()
+  readonly unique_cooking_effect: string;
+
   @IsString({ each: true })
   readonly common_locations: string[];
 
