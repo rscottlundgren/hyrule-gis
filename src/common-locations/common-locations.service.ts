@@ -32,7 +32,7 @@ export class CommonLocationsService {
     return this.repo.save(commonLocation);
   }
 
-  find() {
+  findAll() {
     return this.repo.find({
       select: {
         name: true,
@@ -40,12 +40,26 @@ export class CommonLocationsService {
     });
   }
 
-  findOne(id: number) {
+  async findByName(names: string[]): Promise<CommonLocation[]> {
+    const commonLocations: CommonLocation[] = [];
+
+    for (let i = 0; i < names.length; i++) {
+      const commonLocation = await this.repo.find({
+        where: { name: names[i] },
+      });
+
+      commonLocations.push(commonLocation[0]);
+    }
+
+    return commonLocations;
+  }
+
+  findById(id: number) {
     return this.repo.findOneBy({ id });
   }
 
   async update(id: number, attrs: Partial<CommonLocation>) {
-    const commonLocation = await this.findOne(id);
+    const commonLocation = await this.findById(id);
 
     if (!commonLocation) {
       throw new NotFoundException();
@@ -57,7 +71,7 @@ export class CommonLocationsService {
   }
 
   async remove(id: number) {
-    const commonLocation = await this.findOne(id);
+    const commonLocation = await this.findById(id);
 
     if (!commonLocation) {
       throw new NotFoundException();
