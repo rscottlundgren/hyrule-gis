@@ -24,12 +24,12 @@ export class CommonLocationsController {
 
   @Get()
   findAllCommonLocations() {
-    return this.commonLocationsService.find();
+    return this.commonLocationsService.findAll();
   }
 
   @Get('/:id')
   findCommonLocation(@Param('id') id: string) {
-    return this.commonLocationsService.findOne(parseInt(id));
+    return this.commonLocationsService.findById(parseInt(id));
   }
 
   @Patch('/:id')
