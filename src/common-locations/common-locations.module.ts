@@ -8,5 +8,6 @@ import { CommonLocation } from './entities/common-location.entity';
   imports: [TypeOrmModule.forFeature([CommonLocation])],
   controllers: [CommonLocationsController],
   providers: [CommonLocationsService],
+  exports: [CommonLocationsService],
 })
 export class CommonLocationsModule {}
